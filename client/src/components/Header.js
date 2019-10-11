@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Navbar, NavbarDivider, Button, Drawer } from "@blueprintjs/core";
+import { Navbar, Button, Drawer, Alignment, Classes, Position } from "@blueprintjs/core";
+import NavigationButton from "./NavigationButton";
 
 class Header extends Component {
     state = {
-        drawerIsOpen: true
+        drawerIsOpen: false
     }
 
-    handleClose = () => {
+    closeDrawer = () => {
         this.setState({
             drawerIsOpen: false
         })
@@ -22,15 +23,31 @@ class Header extends Component {
         return (
             <Navbar>
                 <Navbar.Group>
-                    <Navbar.Heading>FishTracker</Navbar.Heading>
-                    <NavbarDivider/>
-                    <Button className="bp3-minimal" icon="home" text="Menu" onClick={this.openDrawer} />
-                    <Drawer isOpen={this.state.drawerIsOpen} size={Drawer.SIZE_LARGE} onClose={this.handleClose}>
-                        <div>
-                            123
-                        </div>
-                    </Drawer>
+                    <Navbar.Heading>
+                        <b>FishTracker</b>
+                    </Navbar.Heading>
                 </Navbar.Group>
+                <Navbar.Group align={Alignment.RIGHT}>
+                    <Button minimal icon="menu" onClick={this.openDrawer} />
+                </Navbar.Group>
+
+                <Drawer 
+                    isOpen={this.state.drawerIsOpen} 
+                    size={Drawer.SIZE_LARGE} 
+                    title="Navigation"
+                    position={Position.LEFT}
+                    onClose={this.closeDrawer}>
+                    <div className={Classes.DRAWER_BODY}>
+                        <div className={Classes.DIALOG_BODY}>
+                            <ul class="navigation-list">
+                                <NavigationButton route="/" icon="home" text="Home" divider onClick={this.closeDrawer} />
+                                <NavigationButton route="/login" icon="log-in" text="Log in" divider onClick={this.closeDrawer} />
+                                <NavigationButton route="/maps" icon="map" text="Maps" divider onClick={this.closeDrawer} />
+                                <NavigationButton route="/add" icon="series-add" text="Add data" onClick={this.closeDrawer}/>
+                            </ul>
+                        </div>
+                    </div>
+                </Drawer>
             </Navbar>
         );
     }
