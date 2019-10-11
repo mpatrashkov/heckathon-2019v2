@@ -24,6 +24,11 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  trustFactor: {
+    type: Schema.Types.Number,
+    required: true,
+    default: 0
+  },
   salt: {
     type: Schema.Types.String,
     required: true
