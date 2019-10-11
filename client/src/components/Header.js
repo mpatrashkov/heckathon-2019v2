@@ -42,6 +42,7 @@ class Header extends Component {
                             <ul class="navigation-list">
                                 <NavigationButton route="/" icon="home" text="Home" divider onClick={this.closeDrawer} />
                                 <NavigationButton route="/login" icon="log-in" text="Log in" divider onClick={this.closeDrawer} />
+                                <NavigationButton route="/logout" icon="log-out" text="Log out" divider onClick={this.closeDrawer} />
                                 <NavigationButton route="/maps" icon="map" text="Maps" divider onClick={this.closeDrawer} />
                                 <NavigationButton route="/add" icon="series-add" text="Add data" onClick={this.closeDrawer}/>
                             </ul>
