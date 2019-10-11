@@ -33,7 +33,7 @@ class Header extends Component {
 
                 <Drawer 
                     isOpen={this.state.drawerIsOpen} 
-                    size={Drawer.SIZE_LARGE} 
+                    size={"80%"} 
                     title="Navigation"
                     position={Position.LEFT}
                     onClose={this.closeDrawer}>
