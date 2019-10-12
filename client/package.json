@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@blueprintjs/core": "^3.19.1",
+    "here-maps-react": "^0.1.3",
     "react": "^16.10.2",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.10.2",
