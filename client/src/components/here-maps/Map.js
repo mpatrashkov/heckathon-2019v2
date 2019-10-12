@@ -49,7 +49,7 @@ class Map extends Component {
 
     render() {
         return (
-            <div id="here-map" style={{width: '100%', height: '400px', background: 'grey' }} />
+            <div id="here-map" style={{width: '100%', height: '100%', background: 'grey' }} />
         );
     }
 }
