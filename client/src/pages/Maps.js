@@ -26,7 +26,8 @@ class Maps extends Component {
         message: '',
         title: '',
         nodes: [],
-        passages: []
+        passages: [],
+        mapMode: "all"
     }
 
 
@@ -77,6 +78,12 @@ class Maps extends Component {
         this.props.store.updatePassageOverlay({ isOpened: false, message: '' })
     }
 
+    changeMapMode(mapMode) {
+        this.setState({
+            mapMode: mapMode
+        });
+    }
+
     static passageService = new PassageService()
     static nodeService = new NodeService()
 
@@ -121,21 +128,74 @@ class Maps extends Component {
                             <MapMarker lat={this.props.store.userLocation.lat} lon={this.props.store.userLocation.lon} icon={
                                 '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="black" stroke-width="1" fill="red" /></svg>'
                             } />
-                            {this.state.nodes ?
+                            
+                            {(this.state.mapMode === "all" || this.state.mapMode === "buoy-data") && this.state.nodes ?
                                 this.state.nodes.filter(node => node.fish == true).map(node => (
-                                    <MapCircle lat={node.lat} lon={node.lon} size={500} onTap={() => this.onTap(node)}></MapCircle>)
+                                    <MapCircle 
+                                        lat={node.lat}
+                                        lon={node.lon}
+                                        size={500}
+                                        color="rgba(0, 128, 0, 0.5)"
+                                        onTap={() => this.onTap(node)}/>)
                                 ) : null
                             }
-                            {this.state.passages ?
+                            {this.state.mapMode === "all" && this.state.passages ?
                                 this.state.passages.map(passage => (
-                                    <MapCircle lat={passage.lat} lon={passage.lon} size={500} onTap={() => this.onTap(passage)}></MapCircle>)
+                                    <MapCircle 
+                                        lat={passage.lat}
+                                        lon={passage.lon}
+                                        size={500}
+                                        // color="rgba(0, 128, 0, 0.5)"
+                                        onTap={() => this.onTap(passage)} />)
                                 ) : null
                             }
+                            {this.state.mapMode === "buoy-grid" && this.state.nodes ?
+                                this.state.nodes.filter(node => node.fish == true).map(node => (
+                                    <MapMarker 
+                                        lat={node.lat}
+                                        lon={node.lon}
+                                        icon={
+                                            '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="black" stroke-width="1" fill="green" /></svg>'
+                                        }
+                                        onTap={() => this.onTap(node)}/>)
+                                ) : null
+                            }
+
                         </Map>
                     </div>
                 ) : (
                         <div>Getting the location data&hellip; </div>
                     )}
+
+                <ButtonGroup vertical className="change-map-mode">
+                    <Button 
+                        type="button" 
+                        large 
+                        className="bp3-button bp3-intent-primary passage-btn" 
+                        onClick={() => this.changeMapMode("all")}>
+                        <Icon 
+                            icon="full-stacked-chart" 
+                            iconSize={27}/> 
+                    </Button>
+                    <Button 
+                        type="button" 
+                        large 
+                        className="bp3-button bp3-intent-primary location-btn" 
+                        onClick={() => this.changeMapMode("buoy-data")}>
+                        <Icon 
+                            icon="layout-skew-grid" 
+                            iconSize={27}/> 
+                    </Button>
+                    <Button 
+                        type="button" 
+                        large 
+                        className="bp3-button bp3-intent-primary location-btn" 
+                        onClick={() => this.changeMapMode("buoy-grid")}>
+                        <Icon 
+                            icon="layout-grid" 
+                            iconSize={27} />
+                    </Button>
+                </ButtonGroup>
 
                 <ButtonGroup className="add-passage">
                     <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" onClick={this.openDrawer}> <Icon icon="add" iconSize={30} /> </Button>

@@ -4,15 +4,20 @@ class MapCircle extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
+        const defaultColor = "rgba(20, 20, 128, 0.2)";
 
         this.circle = new window.H.map.Circle({
             lat: this.props.lat,
             lng: this.props.lon
-        }, this.props.size);
+        }, this.props.size, {
+            style: {
+                strokeWidth: 1,
+                fillColor: this.props.color || defaultColor
+            }
+        });
 
         this.circle.addEventListener('tap', this.props.onTap);
-
+        console.log(this.props.color || defaultColor);
         if(this.props.map) {
             this.props.map.addObject(this.circle);
             console.log(this.circle)
@@ -28,7 +33,9 @@ class MapCircle extends Component {
     }
 
     componentWillUnmount() {
-        //TODO: Remove object
+        if(this.props.map) {
+            this.props.map.removeObject(this.circle);
+        }
     }
 
     componentWillUpdate(prevProps) {

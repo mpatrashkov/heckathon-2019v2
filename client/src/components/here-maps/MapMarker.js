@@ -13,14 +13,18 @@ class MapMarker extends Component {
             icon: new window.H.map.Icon(this.props.icon)
         });
 
+        if(this.props.onTap) {
+            this.marker.addEventListener('tap', this.props.onTap);
+        }
         if(this.props.map) {
             this.props.map.addObject(this.marker);
-            console.log(this.marker)
         }
     }
 
     componentWillUnmount() {
-        //TODO: Remove object
+        if(this.props.map) {
+            this.props.map.removeObject(this.marker);
+        }
     }
 
     componentWillUpdate(prevProps) {

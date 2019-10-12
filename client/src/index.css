@@ -44,8 +44,18 @@ code {
     width: 100%;
 }
 
+.change-map-mode {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+}
+
 .add-passage .bp3-button {
     padding: 1rem 1.5rem !important;
+}
+
+.change-map-mode .bp3-button {
+  padding: 0.66rem 1rem !important;
 }
 
 .center-container {
