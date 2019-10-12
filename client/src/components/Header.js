@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navbar, Button, Drawer, Alignment, Classes, Position, Menu } from "@blueprintjs/core";
 import NavigationButton from "./NavigationButton";
 import { inject, observer } from "mobx-react";
+import { Link } from "react-router-dom";
 
 @inject("store")
 @observer
@@ -27,7 +28,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Group>
                     <Navbar.Heading>
-                        <b>FishTracker</b>
+                        <Link className="no-decoration" to="/"><b className="header-text">FishTracker</b></Link> 
                         {/* <b>{this.props.store.location.lat}</b> */}
                     </Navbar.Heading>
                 </Navbar.Group>
@@ -45,9 +46,9 @@ class Header extends Component {
                         <Menu>
                             <NavigationButton route="/" icon="home" text="Home" divider onClick={this.closeDrawer} />
                             <NavigationButton route="/login" icon="log-in" text="Log in" divider onClick={this.closeDrawer} />
+                            <NavigationButton route="/register" icon="new-person" text="Register" divider onClick={this.closeDrawer} />
                             <NavigationButton route="/logout" icon="log-out" text="Log out" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/maps" icon="map" text="Maps" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/add" icon="series-add" text="Add data" onClick={this.closeDrawer}/>
+                            <NavigationButton route="/maps" icon="map" text="Maps" onClick={this.closeDrawer} />
                         </Menu>
                     </div>
                 </Drawer>

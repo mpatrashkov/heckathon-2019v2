@@ -11,6 +11,8 @@ import { Provider } from "mobx-react";
 import Store from "./store/store";
 import Geolocation from "./components/Geolocation";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
   
 
 class App extends Component {
@@ -31,6 +33,12 @@ class App extends Component {
                             </Route>
                             <Route exact path="/login">
                                 <Login />
+                            </Route>
+                            <Route exact path="/register">
+                                <Register />
+                            </Route>
+                            <Route exact path="/">
+                                <Home />
                             </Route>
                         </Switch>
                     </BrowserRouter>

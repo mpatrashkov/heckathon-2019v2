@@ -79,3 +79,26 @@ code {
 .passage-input {
     width: 75%;
 }
+
+.login-btn {
+  padding: 0 50px !important;
+  margin-top: 20px;
+}
+
+.register-btn {
+  padding: 0 75px !important;
+  margin-top: 20px;
+}
+
+.no-decoration, .no-decoration:link, .no-decoration:visited, .no-decoration:active, .no-decoration:hover {
+  text-decoration: none !important;
+  color: black;
+}
+
+.header-text {
+  font-size: 1.4rem;
+}
+
+.responsive-img {
+  width: 100%;
+}

@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-
-import {
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MenuItem, MenuDivider } from "@blueprintjs/core";
 
 class NavigationButton extends Component {
     render() {
         return (
             <>
-                <Link to={this.props.route}>
+                <Link to={this.props.route} className="no-decoration">
                     <MenuItem
                         icon={this.props.icon} 
                         text={this.props.text} 
