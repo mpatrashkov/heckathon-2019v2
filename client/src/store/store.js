@@ -13,6 +13,11 @@ class Store {
         lon: 27
     }
 
+    @observable passageOverlay = {
+        isOpened: false,
+        message: ''
+    }
+
     @action updateLocation(newLocation) {
         this.location = {
             loaded: true,
@@ -24,6 +29,12 @@ class Store {
         this.userLocation = {
             loaded: true,
             ...newLocation
+        }
+    }
+
+    @action updatePassageOverlay(newOverlay) {
+        this.passageOverlay = {
+            ...newOverlay
         }
     }
 }

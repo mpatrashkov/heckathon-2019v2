@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import Map from "../components/here-maps/Map";
 import { geolocated } from "react-geolocated";
-import { Navbar, Button, Drawer, Alignment, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea } from "@blueprintjs/core";
+import { Navbar, Button, Drawer, Alignment, Dialog, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea, Overlay } from "@blueprintjs/core";
 import { inject, observer } from "mobx-react";
+import { Marker, RouteLine } from "here-maps-react"
+import PassageService from "../services/passageServices"
 
 @inject("store")
 @observer
 class Maps extends Component {
     state = {
         drawerIsOpen: false,
-        lat: this.props.store.
+        lat: this.props.store.userLocation.lat,
+        lon: this.props.store.userLocation.lon,
+        isOpened: false,
+        message: '',
+        title: ''
     }
 
     closeDrawer = () => {
@@ -33,27 +39,57 @@ class Maps extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
     }
-    
+
     centerMapToUser = () => {
 
     }
 
+    toggleOverlay = () => {
+        this.props.store.updatePassageOverlay({ isOpened: false, message: '' })
+    }
+
+    static passageService = new PassageService()
+
     render() {
+        let circles = [];
+
+        if (this.state.passages) {
+            this.state.passages.forEach((passage) => {
+                var circle = new window.H.map.Circle({ lat: passage.lat, lng: passage.lon }, 500)
+                circle.addEventListener('tap', () => {
+                    this.setState(prevState => ({
+                        isOpened: !prevState.isOpened,
+                        message: passage.comment,
+                        title: passage.title
+                    }))
+                })
+                circles.push(circle)
+            })
+        }
+
         console.log(this.state)
+
         return (
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
                     <div style={{ width: '100%', height: '100%' }}>
-                        <Map lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11}/>
+                        <Map circles={circles} lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11}>
+                        </Map>
                     </div>
                 ) : (
                         <div>Getting the location data&hellip; </div>
-                )}
+                    )}
 
                 <ButtonGroup className="add-passage">
                     <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" onClick={this.openDrawer}> <Icon icon="add" iconSize={30} /> </Button>
                     <Button type="button" large className="bp3-button bp3-intent-secondary location-btn" onClick={this.centerMapToUser}> <Icon icon="locate" iconSize={30} /> </Button>
                 </ButtonGroup>
+
+                <Dialog isOpen={this.state.isOpened} title={this.state.title || "fish"} canOutsideClickClose={false} onClose={() => this.setState({ isOpened: false })}>
+                    <div className={Classes.DIALOG_BODY}>
+                        {this.state.message}
+                    </div>
+                </Dialog>
 
                 <Drawer
                     isOpen={this.state.drawerIsOpen}
@@ -86,6 +122,23 @@ class Maps extends Component {
                 </Drawer>
             </div>
         );
+    }
+
+    componentDidUpdate() {
+    }
+
+    async componentDidMount() {
+        try {
+            Maps.passageService.getAllPassages().then((passages) => {
+                console.log(passages)
+                this.setState({
+                    passages
+                })
+            })
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
 
