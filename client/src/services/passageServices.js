@@ -1,6 +1,6 @@
 class PassageService {
     constructor() {
-        this.allUrl = 'http://localhost:9999/passage/'
+        this.allUrl = 'http://192.168.0.179:9999/passage/'
     }
 
     async getAllPassages() {
