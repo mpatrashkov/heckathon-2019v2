@@ -3,5 +3,6 @@ const passageController = require('../controllers/passage');
 const isAuth = require('../middleware/is-auth');
 
 router.post('/create', passageController.createPassage);
+router.get('/get/all', passageController.getAllPassages);
 
 module.exports = router;
