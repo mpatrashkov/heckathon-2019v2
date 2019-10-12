@@ -1,6 +1,6 @@
 class UserServices {
     constructor() {
-        this.allUrl = 'http://localhost:9999/auth/'
+        this.allUrl = 'http://192.168.0.179:9999/auth/'
     }
 
     async registerUser(body) {

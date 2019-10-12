@@ -1,6 +1,6 @@
 class NodeServices {
     constructor() {
-        this.allUrl = 'http://localhost:9999/node/'
+        this.allUrl = 'http://192.168.0.179:9999/node/'
     }
 
     async getAllNodes() {
