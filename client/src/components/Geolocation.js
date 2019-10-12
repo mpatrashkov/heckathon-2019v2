@@ -18,6 +18,15 @@ class Geolocation extends Component {
                 lon: data.coords.longitude
             })
         });
+
+        setInterval(() => {
+            navigator.geolocation.getCurrentPosition((data) => {
+                this.props.store.updateUserLocation({
+                    lat: data.coords.latitude,
+                    lon: data.coords.longitude
+                })
+            });
+        }, 1500);
     }
 
     render() {
