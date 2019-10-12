@@ -52,7 +52,6 @@ class Map extends Component {
             zoom: this.props.zoom,
         });
 
-        console.log(this.props)
         this.props.circles.forEach(circle => {
             this.map.addObject(circle)
         });
@@ -78,8 +77,6 @@ class Map extends Component {
                 lng: this.props.lon
             })
         }
-
-        console.log(this.props)
 
         this.props.circles.forEach(circle => {
             this.map.addObject(circle)

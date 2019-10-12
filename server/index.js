@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const robotRoutes = require('./routes/robot');
 const authRoutes = require('./routes/auth');
 const passageRoutes = require('./routes/passage');
+const nodeRoutes = require('./routes/node')
 require('./database/database')();
 const port = 9999;
 const app = express();
@@ -19,8 +19,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/auth', authRoutes);
-app.use('/robot', robotRoutes);
 app.use('/passage', passageRoutes);
+app.use('/node', nodeRoutes)
 
 // General error handling
 app.use((error, req, res, next) => {

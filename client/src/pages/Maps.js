@@ -4,6 +4,7 @@ import { geolocated } from "react-geolocated";
 import { Navbar, Button, Drawer, Alignment, Dialog, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea, Overlay } from "@blueprintjs/core";
 import { inject, observer } from "mobx-react";
 import PassageService from "../services/passageServices"
+import NodeService from '../services/nodeServices';
 import MapMarker from "../components/here-maps/MapMarker";
 
 @inject("store")
@@ -15,6 +16,8 @@ class Maps extends Component {
         this.updateFunc = (update) => {
             this.update = update;
         }
+
+
     }
 
     state = {
@@ -48,7 +51,7 @@ class Maps extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        
+
     }
 
     centerMapToUser = () => {
@@ -57,7 +60,7 @@ class Maps extends Component {
             lon: this.props.store.userLocation.lon
         })
 
-        if(this.update) {
+        if (this.update) {
             this.update();
         }
     }
@@ -67,6 +70,7 @@ class Maps extends Component {
     }
 
     static passageService = new PassageService()
+    static nodeService = new NodeService()
 
     render() {
         let circles = [];
@@ -85,7 +89,21 @@ class Maps extends Component {
             })
         }
 
-        console.log(this.state)
+        if(this.state.nodes) {
+            this.state.nodes.forEach((node) => {
+                if(node.fish == true) {
+                    var circle = new window.H.map.Circle({ lat: node.lat, lng: node.lon }, 500)
+                    circle.addEventListener('tap', () => {
+                        this.setState(prevState => ({
+                            isOpened: !prevState.isOpened,
+                            message: node.temp,
+                            title: "passage.title"
+                        }))
+                    })
+                    circles.push(circle)
+                }
+            })
+        }
 
         return (
             <div className="maps-page">
@@ -153,8 +171,15 @@ class Maps extends Component {
 
     async componentDidMount() {
         try {
+            setInterval(() => {
+                Maps.nodeService.getAllNodes().then((nodes) => {
+                    this.setState({
+                        nodes
+                    })
+                })
+            }, 3000)
+
             Maps.passageService.getAllPassages().then((passages) => {
-                console.log(passages)
                 this.setState({
                     passages
                 })
