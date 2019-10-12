@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import Map from "../components/here-maps/Map";
 import { geolocated } from "react-geolocated";
 import { Navbar, Button, Drawer, Alignment, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea } from "@blueprintjs/core";
+import { inject, observer } from "mobx-react";
 
-
+@inject("store")
+@observer
 class Maps extends Component {
     state = {
-        drawerIsOpen: false
+        drawerIsOpen: false,
+        lat: this.props.store.
     }
 
     closeDrawer = () => {
@@ -21,7 +24,18 @@ class Maps extends Component {
         })
     }
 
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
     render() {
+        console.log(this.state)
         return (
             <div className="maps-page">
                 {this.props.coords ? (
@@ -48,19 +62,19 @@ class Maps extends Component {
                             <FormGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-title">Title</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-title" placeholder="Add Title..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-title" placeholder="Add Title..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-type">Type</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-type" placeholder="Add Type..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-type" placeholder="Add Type..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-stanf">Stanf</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-stanf" placeholder="Add Stanf..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-stanf" placeholder="Add Stanf..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-comment">Comment</Label>
-                                    <TextArea className="passage-input" name="passage-comment" placeholder="Add Comment..." />
+                                    <TextArea onChange={this.handleChange} className="passage-input" name="passage-comment" placeholder="Add Comment..." />
                                 </ControlGroup>
                             </FormGroup>
                         </div>
