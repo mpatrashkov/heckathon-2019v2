@@ -34,7 +34,7 @@ class Header extends Component {
                 <Drawer 
                     isOpen={this.state.drawerIsOpen} 
                     size={"80%"} 
-                    title="Navigation"
+                    title="Navigation Menu"
                     position={Position.LEFT}
                     onClose={this.closeDrawer}>
                     <div className={Classes.DRAWER_BODY}>
