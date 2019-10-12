@@ -28,7 +28,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Group>
                     <Navbar.Heading>
-                        <Link className="no-decoration" to="/"><b className="header-text">FishTracker</b></Link> 
+                        <Link className="no-decoration" to="/"><b className="header-text">FishTracker</b></Link>
                         {/* <b>{this.props.store.location.lat}</b> */}
                     </Navbar.Heading>
                 </Navbar.Group>
@@ -36,19 +36,26 @@ class Header extends Component {
                     <Button minimal icon="menu" onClick={this.openDrawer} />
                 </Navbar.Group>
 
-                <Drawer 
-                    isOpen={this.state.drawerIsOpen} 
-                    size={"80%"} 
+                <Drawer
+                    isOpen={this.state.drawerIsOpen}
+                    size={"80%"}
                     title="Navigation Menu"
                     position={Position.LEFT}
                     onClose={this.closeDrawer}>
                     <div className={Classes.DRAWER_BODY}>
                         <Menu>
                             <NavigationButton route="/" icon="home" text="Home" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/login" icon="log-in" text="Log in" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/register" icon="new-person" text="Register" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/logout" icon="log-out" text="Log out" divider onClick={this.closeDrawer} />
-                            <NavigationButton route="/maps" icon="map" text="Maps" onClick={this.closeDrawer} />
+                            <NavigationButton route="/maps" icon="map" text="Maps" divider onClick={this.closeDrawer} />
+                            {
+                                this.props.store.userCredentials.username ? (
+                                    <NavigationButton route="#" icon="log-out" onClick={(e) => { e.preventDefault(); localStorage.clear(); window.location.href = "/" }} divider text="Log out" />
+                                ) : (
+                                        <>
+                                            <NavigationButton route="/login" icon="log-in" text="Log in" divider onClick={this.closeDrawer} />
+                                            <NavigationButton route="/register" icon="new-person" text="Register" divider onClick={this.closeDrawer} />
+                                        </>
+                                    )
+                            }
                         </Menu>
                     </div>
                 </Drawer>
