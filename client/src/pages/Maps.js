@@ -120,6 +120,8 @@ class Maps extends Component {
             })
         }
 
+        console.log(this.props.store.userCredentials.username)
+
         return (
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
@@ -210,7 +212,7 @@ class Maps extends Component {
 
                 <Drawer
                     isOpen={this.state.drawerIsOpen}
-                    size={"60%"}
+                    size={"65%"}
                     title="Add Passage"
                     position={Position.BOTTOM}
                     onClose={this.closeDrawer}>

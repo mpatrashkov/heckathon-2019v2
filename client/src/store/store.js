@@ -18,6 +18,12 @@ class Store {
         message: ''
     }
 
+    @observable userCredentials = {
+        userId: localStorage.getItem('userId'),
+        username: localStorage.getItem('username'),
+        isAdmin: localStorage.getItem('isAdmin')
+    }
+
     @action updateLocation(newLocation) {
         this.location = {
             loaded: true,
@@ -35,6 +41,12 @@ class Store {
     @action updatePassageOverlay(newOverlay) {
         this.passageOverlay = {
             ...newOverlay
+        }
+    }
+
+    @action updateUserCredentials(newCredentials) {
+        this.userCredentials = {
+            ...newCredentials
         }
     }
 }
