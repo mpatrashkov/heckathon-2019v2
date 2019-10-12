@@ -5,16 +5,14 @@ import { MenuItem, MenuDivider } from "@blueprintjs/core";
 class NavigationButton extends Component {
     render() {
         return (
-            <>
-                <Link to={this.props.route} className="no-decoration">
-                    <MenuItem
-                        icon={this.props.icon} 
-                        text={this.props.text} 
-                        onClick={this.props.onClick}
-                        tagName="span" />
-                    {this.props.divider ? <MenuDivider /> : null}
-                </Link>
-            </>
+            <Link to={this.props.route} className="no-decoration">
+                <MenuItem
+                    icon={this.props.icon} 
+                    text={this.props.text} 
+                    onClick={this.props.onClick}
+                    tagName="span" />
+                {this.props.divider ? <MenuDivider /> : null}
+            </Link>
         );
     }
 }
