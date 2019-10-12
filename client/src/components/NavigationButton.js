@@ -13,11 +13,11 @@ class NavigationButton extends Component {
                     <Button 
                         minimal
                         large
-                        alignText="right" 
+                        alignText="left" 
                         icon={this.props.icon} 
                         text={this.props.text} 
-                        onClick={this.props.onClick} />
-
+                        onClick={this.props.onClick}
+                        style={{width: "100%"}} />
                     {this.props.divider ? <Divider /> : null}
                 </Link>
             </>
