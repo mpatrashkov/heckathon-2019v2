@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormGroup, InputGroup, Button, Text } from "@blueprintjs/core";
+import { Text } from "@blueprintjs/core";
 
 class Home extends Component {
 
