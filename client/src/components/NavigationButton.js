@@ -9,7 +9,7 @@ class NavigationButton extends Component {
     render() {
         return (
             <>
-                <Link exact to={this.props.route}>
+                <Link to={this.props.route}>
                     <Button 
                         minimal
                         large
