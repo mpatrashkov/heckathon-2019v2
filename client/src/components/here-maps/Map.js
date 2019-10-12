@@ -51,9 +51,12 @@ class Map extends Component {
             zoom: this.props.zoom,
         });
 
-        this.props.circles.forEach(circle => {
-            this.map.addObject(circle)
-        });
+        if(this.props.circles){
+            this.props.circles.forEach(circle => {
+                this.map.addObject(circle)
+            });
+        }
+        
 
 
         var events = new window.H.mapevents.MapEvents(this.map);
@@ -77,9 +80,12 @@ class Map extends Component {
             })
         }
 
-        this.props.circles.forEach(circle => {
-            this.map.addObject(circle)
-        });
+        if(this.props.circles){
+            this.props.circles.forEach(circle => {
+                this.map.addObject(circle)
+            });
+        }
+        
     
 
     }

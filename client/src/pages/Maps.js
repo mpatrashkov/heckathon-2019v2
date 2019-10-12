@@ -24,7 +24,9 @@ class Maps extends Component {
         lon: this.props.store.userLocation.lon,
         isOpened: false,
         message: '',
-        title: ''
+        title: '',
+        nodes: [],
+        passages: []
     }
 
 
@@ -63,6 +65,14 @@ class Maps extends Component {
         }
     }
 
+    onTap = (node) => {
+        this.setState(prevState => ({
+            isOpened: !prevState.isOpened,
+            message: node.temp,
+            title: "passage.title"
+        }))
+    }
+
     toggleOverlay = () => {
         this.props.store.updatePassageOverlay({ isOpened: false, message: '' })
     }
@@ -87,9 +97,9 @@ class Maps extends Component {
             })
         }
 
-        if(this.state.nodes) {
+        if (this.state.nodes) {
             this.state.nodes.forEach((node) => {
-                if(node.fish === true) {
+                if (node.fish === true) {
                     var circle = new window.H.map.Circle({ lat: node.lat, lng: node.lon }, 500)
                     circle.addEventListener('tap', () => {
                         this.setState(prevState => ({
@@ -107,18 +117,20 @@ class Maps extends Component {
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
                     <div style={{ width: '100%', height: '100%' }}>
-                        <Map circles={circles} lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11} update={this.updateFunc}>
+                        <Map lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11} update={this.updateFunc}>
                             <MapMarker lat={this.props.store.userLocation.lat} lon={this.props.store.userLocation.lon} icon={
                                 '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="black" stroke-width="1" fill="red" /></svg>'
                             } />
-                            {this.state.nodes && this.state.nodes.map(node =>
-                                <MapCircle lat={node.lat} lon={node.lon} size={500} onTap={() => {
-                                    this.setState(prevState => ({
-                                        isOpened: !prevState.isOpened,
-                                        message: node.temp,
-                                        title: "passage.title"
-                                    }))
-                                }}></MapCircle>)}
+                            {this.state.nodes ?
+                                this.state.nodes.filter(node => node.fish == true).map(node => (
+                                    <MapCircle lat={node.lat} lon={node.lon} size={500} onTap={() => this.onTap(node)}></MapCircle>)
+                                ) : null
+                            }
+                            {this.state.passages ?
+                                this.state.passages.map(passage => (
+                                    <MapCircle lat={passage.lat} lon={passage.lon} size={500} onTap={() => this.onTap(passage)}></MapCircle>)
+                                ) : null
+                            }
                         </Map>
                     </div>
                 ) : (

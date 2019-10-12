@@ -11,12 +11,20 @@ class MapCircle extends Component {
             lng: this.props.lon
         }, this.props.size);
 
-        this.circle.addEventListener('tap', this.onTap);
+        this.circle.addEventListener('tap', this.props.onTap);
 
         if(this.props.map) {
             this.props.map.addObject(this.circle);
             console.log(this.circle)
         }
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentDidUpdate() {
+
     }
 
     componentWillUnmount() {
