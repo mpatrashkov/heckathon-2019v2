@@ -3,12 +3,20 @@ import Map from "../components/here-maps/Map";
 import { geolocated } from "react-geolocated";
 import { Navbar, Button, Drawer, Alignment, Dialog, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea, Overlay } from "@blueprintjs/core";
 import { inject, observer } from "mobx-react";
-import { Marker, RouteLine } from "here-maps-react"
 import PassageService from "../services/passageServices"
+import MapMarker from "../components/here-maps/MapMarker";
 
 @inject("store")
 @observer
 class Maps extends Component {
+    constructor(props) {
+        super(props);
+
+        this.updateFunc = (update) => {
+            this.update = update;
+        }
+    }
+
     state = {
         drawerIsOpen: false,
         lat: this.props.store.userLocation.lat,
@@ -17,6 +25,8 @@ class Maps extends Component {
         message: '',
         title: ''
     }
+
+
 
     closeDrawer = () => {
         this.setState({
@@ -38,10 +48,18 @@ class Maps extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        
     }
 
     centerMapToUser = () => {
+        this.props.store.updateLocation({
+            lat: this.props.store.userLocation.lat,
+            lon: this.props.store.userLocation.lon
+        })
 
+        if(this.update) {
+            this.update();
+        }
     }
 
     toggleOverlay = () => {
@@ -73,7 +91,10 @@ class Maps extends Component {
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
                     <div style={{ width: '100%', height: '100%' }}>
-                        <Map circles={circles} lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11}>
+                        <Map circles={circles} lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11} update={this.updateFunc}>
+                            <MapMarker lat={this.props.store.userLocation.lat} lon={this.props.store.userLocation.lon} icon={
+                                '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="black" stroke-width="1" fill="red" /></svg>'
+                            }></MapMarker>
                         </Map>
                     </div>
                 ) : (
@@ -93,7 +114,7 @@ class Maps extends Component {
 
                 <Drawer
                     isOpen={this.state.drawerIsOpen}
-                    size={"70%"}
+                    size={"60%"}
                     title="Add Passage"
                     position={Position.BOTTOM}
                     onClose={this.closeDrawer}>
@@ -117,6 +138,9 @@ class Maps extends Component {
                                     <TextArea onChange={this.handleChange} className="passage-input" name="passage-comment" placeholder="Add Comment..." />
                                 </ControlGroup>
                             </FormGroup>
+                            <div className="center-container">
+                                <Button type="button" onClick={this.handleSubmit} large className="bp3-button bp3-intent-primary passage-btn" text="Submit Passage" />
+                            </div>
                         </div>
                     </div>
                 </Drawer>
