@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { geolocated } from "react-geolocated";
 
 @inject("store")
 @observer
@@ -10,6 +9,11 @@ class Geolocation extends Component {
         navigator.geolocation.getCurrentPosition((data) => {
             console.log(data);
             this.props.store.updateLocation({
+                lat: data.coords.latitude,
+                lon: data.coords.longitude
+            })
+
+            this.props.store.updateUserLocation({
                 lat: data.coords.latitude,
                 lon: data.coords.longitude
             })

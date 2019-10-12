@@ -10,8 +10,6 @@ import Maps from "./pages/Maps";
 import { Provider } from "mobx-react";
 import Store from "./store/store";
 import Geolocation from "./components/Geolocation";
-
-import DevTools from 'mobx-react-devtools'
   
 
 class App extends Component {

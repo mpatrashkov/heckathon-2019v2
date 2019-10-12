@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Map from "../components/here-maps/Map";
-import { geolocated } from "react-geolocated";
 import { inject, observer } from "mobx-react";
 import { Button, Drawer, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea } from "@blueprintjs/core";
 
@@ -24,6 +23,10 @@ class Maps extends Component {
         })
     }
 
+    centerMapToUser = () => {
+
+    }
+
     render() {
         return (
             <div className="maps-page">
@@ -37,7 +40,7 @@ class Maps extends Component {
 
                 <ButtonGroup className="add-passage">
                     <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" onClick={this.openDrawer}> <Icon icon="add" iconSize={30} /> </Button>
-                    <Button type="button" large className="bp3-button bp3-intent-secondary location-btn"> <Icon icon="locate" iconSize={30} /> </Button>
+                    <Button type="button" large className="bp3-button bp3-intent-secondary location-btn" onClick={this.centerMapToUser}> <Icon icon="locate" iconSize={30} /> </Button>
                 </ButtonGroup>
 
                 <Drawer
