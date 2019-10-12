@@ -41,6 +41,7 @@ class Maps extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        
     }
     
     centerMapToUser = () => {
@@ -101,7 +102,9 @@ class Maps extends Component {
                                     <TextArea onChange={this.handleChange} className="passage-input" name="passage-comment" placeholder="Add Comment..." />
                                 </ControlGroup>
                             </FormGroup>
-                            <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" text="Submit Passage"> </Button>
+                            <div className="center-container">
+                                <Button type="button" onClick={this.handleSubmit} large className="bp3-button bp3-intent-primary passage-btn" text="Submit Passage" />
+                            </div>
                         </div>
                     </div>
                 </Drawer>

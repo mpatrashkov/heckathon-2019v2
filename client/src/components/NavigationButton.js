@@ -13,7 +13,8 @@ class NavigationButton extends Component {
                     <MenuItem
                         icon={this.props.icon} 
                         text={this.props.text} 
-                        onClick={this.props.onClick} />
+                        onClick={this.props.onClick}
+                        tagName="span" />
                     {this.props.divider ? <MenuDivider /> : null}
                 </Link>
             </>

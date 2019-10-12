@@ -10,6 +10,7 @@ import Maps from "./pages/Maps";
 import { Provider } from "mobx-react";
 import Store from "./store/store";
 import Geolocation from "./components/Geolocation";
+import Login from "./pages/Login";
   
 
 class App extends Component {
@@ -28,8 +29,8 @@ class App extends Component {
                             <Route exact path="/users">
                                 <Header />
                             </Route>
-                            <Route exact path="/">
-                                <Header />
+                            <Route exact path="/login">
+                                <Login />
                             </Route>
                         </Switch>
                     </BrowserRouter>

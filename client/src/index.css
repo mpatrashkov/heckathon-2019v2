@@ -16,6 +16,10 @@ code {
     monospace;
 }
 
+.body-padding {
+  padding: 12px;
+}
+
 .navigation-list {
   text-decoration: none;
   padding: 0;
@@ -42,6 +46,13 @@ code {
 
 .add-passage .bp3-button {
     padding: 1rem 1.5rem !important;
+}
+
+.center-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .add-passage .passage-btn {
