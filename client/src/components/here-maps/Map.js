@@ -31,12 +31,21 @@ class Map extends Component {
 
         var events = new window.H.mapevents.MapEvents(this.map);
 
+        // eslint-disable-next-line
         var behavior = new window.H.mapevents.Behavior(events);
-        // // eslint-disable-next-line
         // var behavior = new window.H.mapevents.Behavior(events);
         // // eslint-disable-next-line
         // var ui = new window.H.ui.UI.createDefault(this.map, layer)
-    }    
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.lat !== prevProps.lat || this.props.lon !== prevProps.lon) {
+          this.map.setCenter({
+              lat: this.props.lat,
+              lng: this.props.lon
+          })
+        }
+    }
 
     render() {
         return (

@@ -33,22 +33,26 @@ class Maps extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
     }
+    
+    centerMapToUser = () => {
+
+    }
 
     render() {
         console.log(this.state)
         return (
             <div className="maps-page">
-                {this.props.coords ? (
+                {this.props.store.location.loaded ? (
                     <div style={{ width: '100%', height: '100%' }}>
-                        <Map classname="map" lat={this.props.coords.latitude} lon={this.props.coords.longitude} zoom={11} />
+                        <Map lat={this.props.store.location.lat} lon={this.props.store.location.lon} zoom={11}/>
                     </div>
                 ) : (
                         <div>Getting the location data&hellip; </div>
-                    )}
+                )}
 
                 <ButtonGroup className="add-passage">
                     <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" onClick={this.openDrawer}> <Icon icon="add" iconSize={30} /> </Button>
-                    <Button type="button" large className="bp3-button bp3-intent-secondary location-btn"> <Icon icon="locate" iconSize={30} /> </Button>
+                    <Button type="button" large className="bp3-button bp3-intent-secondary location-btn" onClick={this.centerMapToUser}> <Icon icon="locate" iconSize={30} /> </Button>
                 </ButtonGroup>
 
                 <Drawer
@@ -85,9 +89,11 @@ class Maps extends Component {
     }
 }
 
-export default geolocated({
-    positionOptions: {
-        enableHighAccuracy: false,
-    },
-    userDecisionTimeout: 5000,
-})(Maps);
+// export default geolocated({
+//     positionOptions: {
+//         enableHighAccuracy: false,
+//     },
+//     userDecisionTimeout: 5000,
+// })(Maps);
+
+export default Maps;

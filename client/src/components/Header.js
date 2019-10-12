@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Navbar, Button, Drawer, Alignment, Classes, Position, Menu } from "@blueprintjs/core";
 import NavigationButton from "./NavigationButton";
+import { inject, observer } from "mobx-react";
 
+@inject("store")
+@observer
 class Header extends Component {
     state = {
         drawerIsOpen: false
@@ -25,6 +28,7 @@ class Header extends Component {
                 <Navbar.Group>
                     <Navbar.Heading>
                         <b>FishTracker</b>
+                        {/* <b>{this.props.store.location.lat}</b> */}
                     </Navbar.Heading>
                 </Navbar.Group>
                 <Navbar.Group align={Alignment.RIGHT}>
