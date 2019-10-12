@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import Map from "../components/here-maps/Map";
+import { geolocated } from "react-geolocated";
+import { Navbar, Button, Drawer, Alignment, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea } from "@blueprintjs/core";
 import { inject, observer } from "mobx-react";
-import { Button, Drawer, Classes, Position, ButtonGroup, Icon, FormGroup, InputGroup, Label, ControlGroup, TextArea } from "@blueprintjs/core";
 import MapMarker from "../components/here-maps/MapMarker";
 
 @inject("store")
 @observer
 class Maps extends Component {
     state = {
-        drawerIsOpen: false
+        drawerIsOpen: false,
+        lat: this.props.store.lat
     }
 
     constructor(props) {
@@ -31,6 +33,16 @@ class Maps extends Component {
         })
     }
 
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+    }
+    
     centerMapToUser = () => {
         this.props.store.updateLocation({
             lat: this.props.store.userLocation.lat,
@@ -43,6 +55,7 @@ class Maps extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
@@ -64,7 +77,7 @@ class Maps extends Component {
 
                 <Drawer
                     isOpen={this.state.drawerIsOpen}
-                    size={"70%"}
+                    size={"60%"}
                     title="Add Passage"
                     position={Position.BOTTOM}
                     onClose={this.closeDrawer}>
@@ -73,21 +86,22 @@ class Maps extends Component {
                             <FormGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-title">Title</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-title" placeholder="Add Title..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-title" placeholder="Add Title..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-type">Type</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-type" placeholder="Add Type..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-type" placeholder="Add Type..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-stanf">Stanf</Label>
-                                    <InputGroup className="passage-input" id="text-input" name="passage-stanf" placeholder="Add Stanf..." />
+                                    <InputGroup onChange={this.handleChange} className="passage-input" id="text-input" name="passage-stanf" placeholder="Add Stanf..." />
                                 </ControlGroup>
                                 <ControlGroup className="passage-control-group">
                                     <Label className="passage-label" htmlFor="passage-comment">Comment</Label>
-                                    <TextArea className="passage-input" name="passage-comment" placeholder="Add Comment..." />
+                                    <TextArea onChange={this.handleChange} className="passage-input" name="passage-comment" placeholder="Add Comment..." />
                                 </ControlGroup>
                             </FormGroup>
+                            <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" text="Submit Passage"> </Button>
                         </div>
                     </div>
                 </Drawer>
