@@ -9,7 +9,7 @@ import { inject, observer } from "mobx-react";
 class Maps extends Component {
     state = {
         drawerIsOpen: false,
-        lat: this.props.store.
+        lat: this.props.store.lat
     }
 
     closeDrawer = () => {
@@ -57,7 +57,7 @@ class Maps extends Component {
 
                 <Drawer
                     isOpen={this.state.drawerIsOpen}
-                    size={"70%"}
+                    size={"60%"}
                     title="Add Passage"
                     position={Position.BOTTOM}
                     onClose={this.closeDrawer}>
@@ -81,6 +81,7 @@ class Maps extends Component {
                                     <TextArea onChange={this.handleChange} className="passage-input" name="passage-comment" placeholder="Add Comment..." />
                                 </ControlGroup>
                             </FormGroup>
+                            <Button type="button" large className="bp3-button bp3-intent-secondary passage-btn" text="Submit Passage"> </Button>
                         </div>
                     </div>
                 </Drawer>
