@@ -172,7 +172,7 @@ class Maps extends Component {
                                 ) : null
                             }
                             {this.state.mapMode === "buoy-grid" && this.state.nodes ?
-                                this.state.nodes.filter(node => node.fish == true).map(node => (
+                                this.state.nodes.map(node => (
                                     <MapMarker
                                         lat={node.lat}
                                         lon={node.lon}
