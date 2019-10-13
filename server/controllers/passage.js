@@ -3,13 +3,16 @@ const User = require('../models/User');
 
 module.exports = {
     createPassage: async (req, res) => {
-        let { lat, lon, comment, userId } = req.body;
+        let { lat, lon, comment, title, stanf, type, userId } = req.body;
 
         let passage = await Passage.create({
             lat,
             lon,
             comment,
-            userId
+            userId,
+            title,
+            stanf,
+            type
         })
 
         res.status(200).json({

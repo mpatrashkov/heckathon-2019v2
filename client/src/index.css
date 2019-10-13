@@ -134,3 +134,20 @@ code {
   padding: 12px;
   margin-bottom: 12px;
 }
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none outside;
+}
+
+.dialog-item:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.bp3-dialog {
+    width: 80% !important;
+}
