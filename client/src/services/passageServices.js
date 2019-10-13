@@ -10,6 +10,23 @@ class PassageService {
         
         return passages;
     }
+
+    async addPassages(body) {
+        let data = await fetch(`${this.allUrl}create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('auth_token')
+            },
+            body: JSON.stringify(body)
+        })
+        let result = await data.json()
+        if (!result.passage) {
+            return null;
+        } else {
+            return result.passage;
+        }
+    }
 }
 
 export default PassageService

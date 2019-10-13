@@ -19,9 +19,15 @@ const passageSchema = new Schema({
         required: true,
         default: "Found by our Robot!"
     },
-    robotId: {
-        type: Schema.Types.ObjectId,
-        ref: 'Robot'
+    type: {
+        type: Schema.Types.String
+    },
+    stanf: {
+        type: Schema.Types.String
+    },
+    title: {
+        type: Schema.Types.String,
+        required: true
     },
     dateOfCreation: {
         type: Schema.Types.String,
