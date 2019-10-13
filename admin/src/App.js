@@ -13,7 +13,7 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        let data = await fetch("http://192.168.1.129:9999/node/get/nodes");
+        let data = await fetch("http://192.168.43.27:9999/node/get/nodes");
         let result = await data.json();
 
         let nodes = result.nodes;
@@ -31,7 +31,7 @@ class App extends Component {
     handleSubmit = async (e) => {
         e.preventDefault()
 
-        let data = await fetch("http://192.168.1.129:9999/node/create", {
+        let data = await fetch("http://192.168.43.27:9999/node/create", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

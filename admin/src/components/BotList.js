@@ -11,7 +11,7 @@ class BotList extends Component {
             console.log(temp, fish);
 
             promises.push(
-                fetch("http://192.168.1.129:9999/node/create/record", {
+                fetch("http://192.168.43.27:9999/node/create/record", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
