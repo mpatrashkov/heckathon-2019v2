@@ -120,8 +120,6 @@ class Maps extends Component {
             })
         }
 
-        console.log(this.props.store.userCredentials.username)
-
         return (
             <div className="maps-page">
                 {this.props.store.location.loaded ? (
