@@ -56,5 +56,13 @@ module.exports = {
             node,
             message: "Node created!"
         })
+    },
+    getAllNodes: async (req,res) => {
+        let nodes = await Node.find();
+
+        res.status(200).json({
+            nodes,
+            message: "Nodes fetched!"
+        })
     }
 }

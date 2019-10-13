@@ -171,15 +171,15 @@ class Maps extends Component {
                                         onTap={() => this.onTap(passage)} />)
                                 ) : null
                             }
-                            {this.state.mapMode === "buoy-grid" && this.state.nodes ?
-                                this.state.nodes.map(node => (
+                            {this.state.mapMode === "buoy-grid" && this.state.devices ?
+                                this.state.devices.map(node => (
                                     <MapMarker
                                         lat={node.lat}
                                         lon={node.lon}
                                         icon={
                                             '<svg height="20" width="20" xmlns="http://www.w3.org/2000/svg"><circle cx="9" cy="9" r="8" stroke="black" stroke-width="1" fill="green" /></svg>'
                                         }
-                                        onTap={() => this.onTap(node)} />)
+                                        />)
                                 ) : null
                             }
 
@@ -224,7 +224,7 @@ class Maps extends Component {
                     <Button type="button" large className="bp3-button bp3-intent-secondary location-btn" onClick={this.centerMapToUser}> <Icon icon="locate" iconSize={30} /> </Button>
                 </ButtonGroup>
 
-                <Dialog isOpen={this.state.isOpened} title={this.state.title || "fish"} canOutsideClickClose={true} onClose={() => this.setState({ isOpened: false })}>
+                <Dialog isOpen={this.state.isOpened} title={this.state.title || "fish"} canOutsideClickClose={false} onClose={() => this.setState({ isOpened: false })}>
                     <div className={Classes.DIALOG_BODY}>
                         <ul>
                             <li className="dialog-item">Message: {this.state.message}</li>
@@ -298,6 +298,12 @@ class Maps extends Component {
             Maps.passageService.getAllPassages().then((passages) => {
                 this.setState({
                     passages
+                })
+            })
+
+            Maps.nodeService.getAllDevices().then((devices) => {
+                this.setState({
+                    devices
                 })
             })
         } catch (error) {
