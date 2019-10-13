@@ -224,7 +224,7 @@ class Maps extends Component {
                     <Button type="button" large className="bp3-button bp3-intent-secondary location-btn" onClick={this.centerMapToUser}> <Icon icon="locate" iconSize={30} /> </Button>
                 </ButtonGroup>
 
-                <Dialog isOpen={this.state.isOpened} title={this.state.title || "fish"} canOutsideClickClose={false} onClose={() => this.setState({ isOpened: false })}>
+                <Dialog isOpen={this.state.isOpened} title={this.state.title || "fish"} canOutsideClickClose={true} onClose={() => this.setState({ isOpened: false })}>
                     <div className={Classes.DIALOG_BODY}>
                         <ul>
                             <li className="dialog-item">Message: {this.state.message}</li>

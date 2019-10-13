@@ -3,6 +3,7 @@ import { Navbar, Button, Drawer, Alignment, Classes, Position, Menu } from "@blu
 import NavigationButton from "./NavigationButton";
 import { inject, observer } from "mobx-react";
 import { Link } from "react-router-dom";
+import logo from '../img/logo.png';
 
 @inject("store")
 @observer
@@ -28,7 +29,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Group>
                     <Navbar.Heading>
-                        <Link className="no-decoration" to="/"><b className="header-text">FishTracker</b></Link>
+                        <Link className="no-decoration" to="/"><img src={logo} alt="logo" /></Link>
                         {/* <b>{this.props.store.location.lat}</b> */}
                     </Navbar.Heading>
                 </Navbar.Group>
