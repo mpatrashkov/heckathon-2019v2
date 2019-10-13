@@ -20,7 +20,7 @@ class Login extends Component {
     handleSumbit = (e) => {
         e.preventDefault();
         Login.userService.loginUser(this.state).then(result => {
-            console.log(result)
+            
             this.props.store.updateUserCredentials({
                 userId: result.userId,
                 username: result.username,

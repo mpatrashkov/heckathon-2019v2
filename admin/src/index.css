@@ -1,0 +1,16 @@
+#root {
+    height: 100vh;
+}
+
+.btnGroup {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btnGroup button {
+    width: 100vw;
+    height: 40vh;
+}

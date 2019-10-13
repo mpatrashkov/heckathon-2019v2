@@ -27,6 +27,7 @@ class Maps extends Component {
         title: '',
         type: '',
         stanf: '',
+        temp: '',
         nodes: [],
         passages: [],
         mapMode: "all",
@@ -93,7 +94,8 @@ class Maps extends Component {
             message: node.comment || "This Passage Was Found By Our Device",
             title: node.title || "Fish Passage",
             type: node.type || "No Info About Type",
-            stanf: node.stanf || "No Info About Stanf"
+            stanf: node.stanf || "No Info About Stanf",
+            temp: node.temp || "No Info About Temperature"
         }))
     }
 
@@ -230,6 +232,7 @@ class Maps extends Component {
                             <li className="dialog-item">Message: {this.state.message}</li>
                             <li className="dialog-item">Type: {this.state.type}</li>
                             <li className="dialog-item">Stanf: {this.state.stanf}</li>
+                            <li className="dialog-item">Temperature: {this.state.temp} Celsius</li>
                         </ul>
                         
                     </div>

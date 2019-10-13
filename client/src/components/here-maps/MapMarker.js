@@ -4,8 +4,6 @@ class MapMarker extends Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props);
-
         this.marker = new window.H.map.Marker({
             lat: this.props.lat,
             lng: this.props.lon

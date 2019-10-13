@@ -17,10 +17,8 @@ class MapCircle extends Component {
         });
 
         this.circle.addEventListener('tap', this.props.onTap);
-        console.log(this.props.color || defaultColor);
         if(this.props.map) {
             this.props.map.addObject(this.circle);
-            console.log(this.circle)
         }
     }
 

@@ -24,7 +24,7 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         Register.userService.registerUser(this.state).then(result => {
-            console.log(result)
+            
             this.props.store.updateUserCredentials({
                 userId: result.userId,
                 username: result.username,

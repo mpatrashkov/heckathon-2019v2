@@ -24,7 +24,7 @@ module.exports = {
       let user = await User.find();
       let usernameCheck = user.filter(u => u.username === username)
       let emailCheck = user.filter(u => u.email === email)
-      console.log(usernameCheck)
+      
       if (usernameCheck.length) {
         errors.push("A user with this username already exists!")
       }

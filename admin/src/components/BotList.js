@@ -8,10 +8,10 @@ class BotList extends Component {
         for(let bot of this.props.bots) {
             let fish = Math.round(Math.random()) == 1;
             let temp = Math.random() * (30 - 20) + 20;
-            console.log(temp, fish);
+            
 
             promises.push(
-                fetch("http://192.168.1.129:9999/node/create/record", {
+                fetch("http://192.168.43.27:9999/node/create/record", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
